@@ -43,17 +43,17 @@ def request( resource, param1='', param2='',  param3='', method='GET', headers={
 #############################################################################
 parser = argparse.ArgumentParser(description='https://github.com/osgpcq/atlassian-cli-py',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('--client',               default='exo',       help='Config file selection')
+parser.add_argument('--client',               default='exo',       help='Choose the credential')
 parser.add_argument('--users',                action='store_true', help='List users')
 parser.add_argument('--debug',                action='store_true', help='Debug information')
 parser.add_argument('--noverbose',            action='store_true', default=False, help='Verbose')
 args = parser.parse_args()
 
-config_file='./atlassian-'+args.client+'.conf'
+config_file='./config.conf'
 if os.path.isfile(config_file):
   parser = ConfigParser()
-  parser.read('./atlassian-'+args.client+'.conf', encoding='utf-8')
-  auth = HTTPBasicAuth(parser.get('atlassian', 'username'), parser.get('atlassian', 'password'))
+  parser.read(config_file, encoding='utf-8')
+  auth = HTTPBasicAuth(parser.get('atlassian', 'username_'+args.client), parser.get('atlassian', 'password_'+args.client))
 else:
   sys.exit('Configuration file not found!')
 
