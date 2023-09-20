@@ -18,7 +18,7 @@ from tabulate import tabulate
 
 api_ver = '3'
 api_url = 'https://exogroup.atlassian.net/rest/api/'+api_ver+'/'
-
+#############################################################################
 def request( method='GET', resource='' , param='', headers={} ):
   url=api_url+resource
   headers.update({'accept': 'application/json'})
@@ -107,6 +107,7 @@ def print_tabulate( table, tablefmt='rounded_outline', stralign='left', showinde
       print(tabulate(table, tablefmt='plain', showindex=showindex, stralign=stralign))
     else:
       print(tabulate(table, tablefmt=tablefmt, headers=headers, showindex=showindex, stralign=stralign))
+#############################################################################
 #############################################################################
 parser = argparse.ArgumentParser(description='https://github.com/osgpcq/atlassian-cli-py',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
