@@ -19,7 +19,7 @@ from tabulate import tabulate
 api_ver = '3'
 api_url = 'https://exogroup.atlassian.net/rest/api/'+api_ver+'/'
 #############################################################################
-def request( method='GET', resource='' , param='', headers={} ):
+def request( method='GET', resource='' , params='', headers={} ):
   url=api_url+resource
   headers.update({'accept': 'application/json'})
   if (args.verbose) or (args.debug):
