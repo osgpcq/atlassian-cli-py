@@ -24,5 +24,4 @@ options:
 
 
 # History
-/!\ nextPageToken not supported yet !!
 Still in quick & dirty dev phase!

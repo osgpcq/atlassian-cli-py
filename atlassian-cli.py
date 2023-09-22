@@ -19,7 +19,9 @@ from tabulate import tabulate
 api_ver = '3'
 api_url = 'https://exogroup.atlassian.net/rest/api/'+api_ver+'/'
 #############################################################################
-def request( method='GET', resource='' , params='', headers={} ):
+def request( method='GET', resource='' , auth='', headers={}, params='', data='' ):
+  # data:   POST, PUT, ...
+  # params: GET, ...
   url=api_url+resource
   headers.update({'accept': 'application/json'})
   if (args.verbose) or (args.debug):
@@ -30,8 +32,10 @@ def request( method='GET', resource='' , params='', headers={} ):
   response=requests.request(
     method,
     api_url+resource,
+    auth=auth,
     headers=headers,
-    auth=auth
+    params=params,
+    data=data
   )
   if (args.verbose) or (args.debug):
     print('Status code: '+str(response.status_code))
@@ -127,7 +131,7 @@ if os.path.isfile(config_file):
 else:
   sys.exit('Configuration file not found!')
 
-users=request( resource='users/search' )
+users=request( resource='users/search', auth=auth, params={ 'maxResults': 5000 } )
 # /!\ Need to support nextPageToken !!!
 print_tabulate( table=users, tablefilterkeys=['avatarUrls','self'], sort=True, sortcolumn='displayName' )
 #############################################################################
